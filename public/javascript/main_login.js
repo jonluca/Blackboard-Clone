@@ -14,10 +14,7 @@ $(document).ready(function () {
         $.ajax({
             url: $('#loginform').attr('action'),
             type: 'POST',
-            data: {
-                j_username: username,
-                j_password: password
-            },
+            data: $('#loginform').serialize(),
             success: function (data, jqXHR) {
                 console.log('form submitted.');
                 console.log(data);
