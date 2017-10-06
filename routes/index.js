@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const logger = require('../utils/logger');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.redirect("/webapps/login")
@@ -17,10 +17,9 @@ router.get('/idp/profile/SAML2/Redirect/SSO', function (req, res, next) {
 router.post('/idp/profile/SAML2/Redirect/SSO/login', function (req, res, next) {
     var username = req.body.j_username;
     var password = req.body.j_password;
-    console.log(username);
-    console.log(password);
+    logger.info(username);
+    logger.info(password);
     res.send("Success");
 });
-
 
 module.exports = router;
