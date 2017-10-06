@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35c184e2-aa26-4ccb-a7fa-aed627bd95af" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ecosystem.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ecosystem.config.js" afterPath="$PROJECT_DIR$/ecosystem.config.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -332,12 +332,12 @@
       <option name="presentableId" value="Default" />
       <updated>1507254753823</updated>
       <workItem from="1507254755396" duration="578000" />
-      <workItem from="1507258750121" duration="4624000" />
+      <workItem from="1507258750121" duration="4653000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5202000" />
+    <option name="totallyTimeSpent" value="5231000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />

@@ -6,7 +6,7 @@ module.exports = {
     apps: [
         // First application
         {
-            name: 'blackboard;',
+            name: 'blackboard',
             script: 'bin/www',
             env: {
                 NODE_ENV: 'production'
