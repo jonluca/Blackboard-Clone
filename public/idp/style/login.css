@@ -591,6 +591,12 @@ button:active {
     }
 }
 
+#loading {
+    display: block;
+}
+.hidden {
+    display: none;
+}
 .wait .content-area p {
     margin: 0 0 0.5rem
 }
