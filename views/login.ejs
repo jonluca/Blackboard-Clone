@@ -1,0 +1,208 @@
+<html lang="en-US" xml:lang="en"><head>
+    <title>USC Shibboleth Single Sign-on</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="/idp/images/favicon.ico">
+
+    <link rel="stylesheet" href="/idp/style/login.css" type="text/css" media="screen,print">
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" media="all" href="/idp/style/ie.css">
+    <![endif]-->
+</head>
+
+<body>
+<div class="page-wrapper">
+    <header class="site-header">
+        <div class="site-branding">
+            <h1 class="brand-title"><a href="http://www.usc.edu">University of Southern California</a></h1>
+        </div><!-- .site-branding -->
+    </header>
+
+    <div class="content-area narrow">
+        <div class="main">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="content">
+                        <div class="column one">
+
+
+
+                            <form id="loginform" action="/idp/profile/SAML2/Redirect/SSO?execution=e1s2" method="post">
+
+                                <p><strong>Welcome.</strong> Please sign in to continue.</p>
+                                <div class="form-element-wrapper">
+                                    <div class="net-id field">
+                                        <label for="username">USC NetID (username)</label>
+                                        <input class="form-element form-field" id="username" name="j_username" type="text" value="" tabindex="10" spellcheck="false" placeholder="USC NetID (username)" novalidate="" maxlength="24" autocapitalize="off" autocorrect="off" aria-required="true" aria-invalid="false">
+                                        <div class="tooltip" id="tooltip-netid-first"><span class="tooltip-content">
+		    The first character must be a letter.
+		</span></div>
+                                        <div class="tooltip" id="tooltip-netid-charset"><span class="tooltip-content xl">
+		    Can contain only letters, numbers, hyphens, and underscores.
+		</span></div>
+                                        <div class="tooltip" id="tooltip-netid-length"><span class="tooltip-content">
+		    Must be 3 – 8 characters long.
+		</span></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-element-wrapper">
+                                    <div class="password field">
+                                        <label for="password">Password</label>
+                                        <input class="form-element form-field" id="password" name="j_password" type="password" value="" tabindex="20" spellcheck="false" placeholder="Password" autocorrect="off" autocapitalize="off" aria-required="true" aria-invalid="false">
+                                    </div>
+                                </div>
+
+                                <div class="form-element-wrapper">
+                                </div>
+                                <div class="form-element-wrapper">
+                                    <button tabindex="30" autofocus="autofocus" class="form-element form-button" type="submit" name="_eventId_proceed" onclick="this.childNodes[0].nodeValue='Logging in, please wait...'">Sign in</button>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="instructions">
+            <p class="assistance"><a class="activate" href="https://netid.usc.edu/account_services/activate_account">Activate new account</a> <span class="right"><a class="forgot-netid" href="https://netid.usc.edu/account_services/forgot_netid">Forgot NetID</a> <a class="forgot-password" href="https://netid.usc.edu/account_services/forgot_password">Forgot password</a></span></p>
+            <p><strong>To sign out,</strong> close your web browser. This step will prevent others from accessing your account when you are using a shared computer.</p>
+            <p><strong>Need help?</strong> Visit <a href="https://itservices.usc.edu/uscnetid/">USC NetID account services</a> or contact the ITS Customer Support Center at <a href="tel:+1-213-740-5555">213‑740‑5555</a> or <a href="mailto:consult@usc.edu">consult@usc.edu</a>.</p>
+        </div>
+
+        <footer>
+            <div class="container container-footer">
+            </div>
+        </footer>
+
+    </div>
+    <script type="text/javascript">
+        window.onload = function() {
+            timeout = [];
+            netid_first_shown = netid_chars_shown = netid_length_shown = false;
+
+            var usertrim = function() {
+                try {
+                    var value = document.getElementById("netid").value;
+                    apos=value.indexOf("@");
+                    if (apos>=0) {
+                        value = value.substring(0,apos);
+                        document.getElementById("netid").value = value;
+                    }
+                }
+                catch (err)
+                {
+                }
+                return true;
+            }
+
+            // format USC NetID
+            function validateNetIDchars(n) {
+                var re = /^[a-zA-Z0-9\-\_]+$/;
+                return re.test(n);
+            }
+
+            // first character can only be a letter
+            function validateNetIDfirst(c) {
+                var re = /^[a-zA-Z]$/;
+                return re.test(c);
+            }
+
+            // length is at least 3 characters and at most 8
+            function validateNetIDlength(n) {
+                var re = /^\w{3,8}$/;
+                return re.test(n);
+            }
+
+            // all-in-one NetID validation regular expression
+            function validateNetID(n) {
+                var re = /^[a-zA-Z][a-zA-Z0-9\-\_]{2,7}$/;
+                return re.test(n);
+            }
+
+            function netidkeyup() {
+                netid = document.getElementById("username");
+                val = netid.value;
+                var first = val.substr(0,1);
+
+                if( val ) {
+                    if( !validateNetIDfirst(first) ) { // show alert if the first character isn't a letter
+                        if(!netid_first_shown) {
+                            if(document.getElementById("tooltip-netid-first").className.indexOf("active")==-1) { document.getElementById("tooltip-netid-first").className += " active"; }
+                            if(timeout["netid-first"]) { clearTimeout(timeout["netid-first"]); }
+                            timeout["netid-first"] = setTimeout(function() {
+                                document.getElementById("tooltip-netid-first").className = document.getElementById("tooltip-netid-first").className.substring(0,document.getElementById("tooltip-netid-first").className.indexOf("active"));
+                            }, 2500);
+                            netid_first_shown = true;
+                        }
+                    } else {
+                        netid_first_shown = false;
+                    }
+
+                    if( !validateNetIDchars(val) ) { // show alert if there is an invalid character
+                        if(!netid_chars_shown) {
+                            if(document.getElementById("tooltip-netid-charset").className.indexOf("active")==-1) { document.getElementById("tooltip-netid-charset").className += " active"; }
+                            if(timeout["netid-charset"]) { clearTimeout(timeout["netid-charset"]); }
+                            timeout["netid-charset"] = setTimeout(function() {
+                                document.getElementById("tooltip-netid-charset").className = document.getElementById("tooltip-netid-charset").className.substring(0,document.getElementById("tooltip-netid-charset").className.indexOf("active")-1);
+                            }, 2500);
+                            netid_chars_shown = true;
+                        }
+                    } else {
+                        netid_chars_shown = false;
+                    }
+                } else {
+                    netid_first_shown = netid_chars_shown = netid_length_shown = false;
+                }
+            }
+
+            function netidblur() {
+                netid = document.getElementById("username");
+                val = netid.value;
+
+                if(val) {
+                    if( !validateNetIDchars(val) ) { // show alert if there is an invalid character
+                        netid_chars_shown = true;
+                        if(document.getElementById("tooltip-netid-charset").className.indexOf("active")==-1) { document.getElementById("tooltip-netid-charset").className += " active"; }
+                        if(timeout["netid-charset"]) { clearTimeout(timeout["netid-charset"]); }
+                        timeout["netid-charset"] = setTimeout(function() {
+                            document.getElementById("tooltip-netid-charset").className = document.getElementById("tooltip-netid-charset").className.substring(0,document.getElementById("tooltip-netid-charset").className.indexOf("active")-1);
+                        }, 2500);
+                    } else if( !validateNetIDfirst(val.substr(0,1)) ) { // show alert if the first character isn't a letter
+                        netid_first_shown = true;
+                        if(document.getElementById("tooltip-netid-first").className.indexOf("active")==-1) { document.getElementById("tooltip-netid-first").className += " active"; }
+                        if(timeout["netid-first"]) { clearTimeout(timeout["netid-first"]); }
+                        timeout["netid-first"] = setTimeout(function() {
+                            document.getElementById("tooltip-netid-first").className = document.getElementById("tooltip-netid-first").className.substring(0,document.getElementById("tooltip-netid-first").className.indexOf("active")-1);
+                        }, 2500);
+                    } else if( !validateNetIDlength(val) ) { // show alert if the NetID is too short or long
+                        netid_length_shown = true;
+                        if(document.getElementById("tooltip-netid-length").className.indexOf("active")==-1) { document.getElementById("tooltip-netid-length").className += " active"; }
+                        if(timeout["netid-length"]) { clearTimeout(timeout["netid-length"]); }
+                        timeout["netid-length"] = setTimeout(function() {
+                            document.getElementById("tooltip-netid-length").className = document.getElementById("tooltip-netid-length").className.substring(0,document.getElementById("tooltip-netid-length").className.indexOf("active")-1);
+                        }, 2000);
+                    }
+                } else {
+                    netid_first_shown = netid_chars_shown = netid_length_shown = false;
+                }
+            }
+
+            document.forms.loginform.onsubmit = function() { usertrim(); }
+            netid = document.getElementById("username");
+            netid.onblur = function() { usertrim(); netidblur(); }
+            netid.onkeyup = function() { netidkeyup(); }
+            netid.focus();
+        }
+    </script>
+    <link rel="stylesheet" href="/idp/style/sprite.css" type="text/css" media="screen,print">
+
+
+</div></body></html>

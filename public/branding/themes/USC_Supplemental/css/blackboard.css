@@ -1,0 +1,880 @@
+/* SASS imports */
+/* Use this file in conjunction with Compass:
+ * http://compass-style.org
+ * You should check if a function exists in Compass first.
+ */
+/*
+	TOC
+	0. Includes
+	1. Variable Settings
+	2. Typography
+	3. Layout
+	4. CSS Visuals
+	5. Images
+	6. Retina
+	
+*/
+/* ====================================================================================
+	alpha-me() - by @cballenar - January 4th, 2014
+=======================================================================================
+
+A SCSS mixin to create RGB fallbacks for RGBa styles.
+
+## How to
+This mixin takes up to 4 arguments (minimum of two)
+
+ - $property: the css property to be used,      e.g.: 'border'
+ - $attributes: the additional attributes,      e.g.: '1px solid'
+ - $color: the translucent color to be used,    e.g.: 'rgba(240,20,200,.5)'
+ - $background: color that will be used in mix, e.g.: '#DADADA'
+
+You're required to enter at least the $property and $color variables, so you end up
+with the following options:
+ - @include alpha-me($property, $color);
+ - @include alpha-me($property, $color, $background);
+ - @include alpha-me($property, $attributes, $color);
+ - @include alpha-me($property, $attributes, $color, $background);
+
+### Sample input
+	.element { 
+		@include alpha-me( color, rgba(black,.5) );
+
+		@include alpha-me( background-color, rgba(#dffa14,.5), #529ef0);
+
+		@include alpha-me( box-shadow, 1px 1px 2px, rgba(white, .25));
+
+		@include alpha-me( border, 3px solid, rgba(240,20,200,.5), #DADADA); }
+
+### Sample output:
+	.element { 
+		color: #7F7F7F;
+		color: rgba(0, 0, 0, 0.5);
+
+		background-color: #98CC82;
+		background-color: rgba(223, 250, 20, 0.5);
+
+		box-shadow: 1px 1px 2px #FFF;
+		box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.25);
+
+		border: 3px solid #E577D1;
+		border: 3px solid rgba(240, 20, 200, 0.5); }
+
+## Notes
+ - If no background color is specified, white is used by default
+ - We can use the rgba SASS function to enter the translucent color in other formats
+	 - rgba(red, .5)
+	 - rgba(#dffa14, .75)
+ - Can you think of a better name for the mixin? I'm not in love with it...
+
+=======================================================================================
+
+## Credits
+Thanks to John W. Long (@johnwlong) whose work is the heart of this mixin.
+(http://thesassway.com/intermediate/mixins-for-semi-transparent-colors)
+
+=======================================================================================
+*/
+/*body { background: #529ef0; }
+.box {
+	width: 100px; height: 100px;
+	position: absolute;
+	margin: auto;
+	top: 0; right: 0; bottom: 0; left: 0;
+
+	text-align:center; line-height: 100px; 
+
+	// 2 attributes
+	@include alpha-me(color, rgba(black,.5));
+
+	// 3 attributes
+	@include alpha-me(background-color, rgba(#dffa14,.5), #529ef0);
+
+	// 3 attributes
+	@include alpha-me(box-shadow, 1px 1px 2px, rgba(white, .25));
+
+	// 4 attributes
+	@include alpha-me(border, 3px solid, rgba(240,20,200,.5), #DADADA);
+}*/
+/* Animation mixin
+ * 
+ * Use this mixin to create multiple animations.
+ * 
+ * Usage: 
+ 
+	.class { @include animation('animation-1 .5s 1', 'animation-2 .5s 1 .5s') }
+	
+ * For a list of available animation types, please see MDN
+ * [https://developer.mozilla.org/en-US/docs/Web/CSS/animation]
+ *
+ * Credit: [http://joshbroton.com/quick-fix-sass-mixins-for-css-keyframe-animations/]
+ */
+/* 480px */
+/* 560px */
+/* 640px */
+/* 768px */
+/* 1024px */
+/* 1440px */
+/* 1920px */
+/*
+	
+	@media only screen and (max-width: 35em) { }
+	@media only screen and (min-width: 0em) and (max-width: 35em) { }
+	@media only screen and (min-width: 35em) { }
+	
+	@media only screen and (max-width: 35em) { }
+	@media only screen and (min-width: 30.0625em) and (max-width: 35em) { }
+	@media only screen and (min-width: 35em) { }
+	
+	@media only screen and (max-width: 40em) { }
+	@media only screen and (min-width: 35.0625em) and (max-width: 40em) { }
+	@media only screen and (min-width: 40em) { }
+	
+	@media only screen and (max-width: 48em) { }
+	@media only screen and (min-width: 40.0625em) and (max-width: 48em) { }
+	@media only screen and (min-width: 48em) { }
+	
+	@media only screen and (max-width: 64em) { }
+	@media only screen and (min-width: 48.0625em) and (max-width: 64em) { }
+	@media only screen and (min-width: 64em) { }
+	
+	@media only screen and (max-width: 90em) { }
+	@media only screen and (min-width: 64.0625em) and (max-width: 90em) { }
+	@media only screen and (min-width: 90em) { }
+	
+	@media only screen and (max-width: 120em) { }
+	@media only screen and (min-width: 90.0625em) and (max-width: 120em) { }
+	@media only screen and (min-width: 120em) { }
+*/
+/* Keyframes mixin
+ * 
+ * Use this mixin to create your own [name] mixin for referencing in your styles.
+ * 
+ * Usage: 
+ 
+	@include keyframes(fadeIn) {
+		from	{ opacity: 0; }
+		to		{ opacity: 1; }
+	}
+	
+ * For a list of available animation types, please see MDN
+ * [https://developer.mozilla.org/en-US/docs/Web/CSS/animation]
+ */
+/* Vertical Alignment
+ * 
+ * Use this mixin to vertically center an elment in its container box
+ * 
+ * Usage: 
+ *
+ *	.class { @include vertical-align; }
+ *
+ * Credit: [http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/]
+ * 
+ * Note: If blurry, add the following to the parent element:
+
+	.parent-element {
+		-webkit-transform-style: preserve-3d;
+	}
+ */
+/* fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,800,800italic);
+/* variables */
+.sprite, .usc a:before, .usc a:after, .content .help-links li:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat; }
+
+.body-text, #loginAnnouncements, .content article, .promo .summary, .help-for .padding article {
+  font-size: 1rem;
+  line-height: 1.5; }
+  @media only screen and (min-width: 40em) {
+    .body-text, #loginAnnouncements, .content article, .promo .summary, .help-for .padding article {
+      font-size: 1.2rem; } }
+
+.chalkboard, .site-header, footer.site-footer {
+  background: #333;
+  background-image: url(../images/chalkboard-38.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center top;
+  color: #fff; }
+  @media only screen and (min-width: 64em) {
+    .chalkboard, .site-header, footer.site-footer {
+      background-size: 100%; } }
+
+/* basic elements */
+html, body {
+  min-height: 100%; }
+
+html {
+  font-size: 100%;
+  line-height: 1.2; }
+
+body {
+  color: #000;
+  background: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  min-width: 18rem; }
+
+body, input, button {
+  font-family: "Open Sans", helvetica neue, helvetica, arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.25;
+  margin: 0; }
+
+strong {
+  font-weight: 800; }
+
+em {
+  font-style: italic; }
+
+::selection {
+  background: rgba(0, 0, 0, 0.2);
+  /* Safari */ }
+
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.2);
+  /* Firefox */ }
+
+button, input, a, .help:before, .show-hide a, .account-services a {
+  -webkit-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out; }
+
+a {
+  color: #900;
+  text-decoration: none; }
+  a:hover {
+    color: #600; }
+
+p {
+  margin: 0;
+  padding: 0.5rem 0; }
+
+label {
+  display: none; }
+
+input {
+  color: #444;
+  background: #fff;
+  padding: 0.6rem 5% 0.6rem 13%;
+  border: none;
+  font-size: 1.25rem;
+  width: 82%;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-border-radius: 0.125rem;
+  -moz-border-radius: 0.125rem;
+  border-radius: 0.125rem; }
+  @media only screen and (max-width: 40em) {
+    input {
+      font-size: 1.5rem; } }
+
+input:focus {
+  color: #000; }
+
+input:focus, button:focus {
+  outline: none; }
+
+input::-webkit-input-placeholder {
+  opacity: 0.9999;
+  color: #aaa;
+  -webkit-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out; }
+
+input:-moz-placeholder {
+  opacity: 0.9999;
+  color: #aaa;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out; }
+
+input::-moz-placeholder {
+  opacity: 0.9999;
+  color: #aaa;
+  -moz-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out; }
+
+input:-ms-input-placeholder {
+  opacity: 0.9999;
+  color: #aaa;
+  -ms-transition: opacity 0.35s ease-in-out;
+  transition: opacity 0.35s ease-in-out; }
+
+:focus::-webkit-input-placeholder {
+  opacity: 0; }
+
+:focus:-moz-placeholder {
+  opacity: 0; }
+
+:focus::-moz-placeholder {
+  opacity: 0; }
+
+:focus:-ms-input-placeholder {
+  opacity: 0; }
+
+/* header */
+.usc {
+  background: #900;
+  position: relative;
+  height: 4rem;
+  margin: 0;
+  padding: 0; }
+  .usc a {
+    float: right;
+    text-indent: -119988px;
+    overflow: hidden;
+    text-align: left;
+    width: 2rem;
+    height: 5rem;
+    margin: 0 1rem;
+    position: relative;
+    background-position: 0 -9999px;
+    background-repeat: no-repeat; }
+    .usc a:before, .usc a:after {
+      height: 100%; }
+    .usc a:before {
+      width: 2rem;
+      background-position: 0 0.5rem;
+      background-size: 12rem 3rem; }
+    @media only screen and (min-width: 35em) {
+      .usc a {
+        width: 8rem; }
+        .usc a:after {
+          left: 1.8rem;
+          width: 6.3rem;
+          height: 3rem;
+          background-position: -5rem 0.25rem;
+          background-size: 28rem 6.75rem; } }
+    @media only screen and (min-width: 48em) {
+      .usc a {
+        background-size: 12rem 3rem;
+        background-position: 0 0.5rem;
+        width: 12rem;
+        margin: 0; }
+        .usc a:before, .usc a:after {
+          display: none; } }
+
+.content-width, .site-header .padding, .content .padding, .promo .padding, .help-for .padding, footer.site-footer .padding {
+  clear: both;
+  max-width: 62.5rem;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  overflow: hidden;
+  *zoom: 1; }
+  @media only screen and (min-width: 64em) {
+    .content-width, .site-header .padding, .content .padding, .promo .padding, .help-for .padding, footer.site-footer .padding {
+      padding-left: 0;
+      padding-right: 0; } }
+
+.site-header > .padding {
+  position: relative;
+  padding: 1rem 0; }
+  @media only screen and (min-width: 40em) {
+    .site-header > .padding {
+      padding: 2rem 0; } }
+  @media only screen and (min-width: 64em) {
+    .site-header > .padding {
+      padding: 3rem 0 2.25rem 0; }
+      .site-header > .padding:before, .site-header > .padding:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 0.25rem;
+        background: url(../images/chalkline.jpg) no-repeat;
+        background-size: 100%; }
+      .site-header > .padding:before {
+        top: 2rem; }
+      .site-header > .padding:after {
+        bottom: 2rem;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg); } }
+.site-header a {
+  color: #fc0; }
+.site-header h1 {
+  margin: 0 1.5rem 1rem 1.5rem;
+  font-size: 3rem;
+  text-indent: -9999px;
+  background-image: url(../images/site-title.png);
+  background-image: url(../images/site-title.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 0;
+  width: 0;
+  padding-top: 15%;
+  padding-left: calc(50% + -1.5rem);
+  padding-right: calc(50% + -1.5rem);
+  background-size: 100%; }
+  @media only screen and (min-width: 48em) {
+    .site-header h1 {
+      padding: 0;
+      display: block;
+      margin: 0 auto 1rem auto;
+      width: 25rem;
+      height: 4rem;
+      background-size: 24.25rem 2.3125rem;
+      background-position: 0.5rem center; } }
+  @media only screen and (min-width: 64em) {
+    .site-header h1 {
+      display: inline-block;
+      margin: 0; } }
+.site-header .menu {
+  display: block;
+  position: relative; }
+  @media only screen and (min-width: 48em) {
+    .site-header .menu {
+      margin: 0 auto;
+      width: 37.5rem; }
+      .site-header .menu:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -0.8rem;
+        width: 100%;
+        height: 0.25rem;
+        background: url(../images/chalkline.jpg) no-repeat;
+        background-size: 100%; } }
+  @media only screen and (min-width: 64em) {
+    .site-header .menu {
+      display: inline-block;
+      float: right;
+      margin: 0;
+      width: auto; }
+      .site-header .menu:before {
+        display: none; } }
+  .site-header .menu ul {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+    list-style: none; }
+    .site-header .menu ul li {
+      float: left;
+      margin: 0 0.5rem 0.8rem 0;
+      padding: 0;
+      width: calc(50% + -1.1rem); }
+      @media only screen and (min-width: 48em) {
+        .site-header .menu ul li {
+          float: none;
+          display: inline-block;
+          width: auto; } }
+      .site-header .menu ul li:first-child {
+        margin-left: 0; }
+      .site-header .menu ul li a {
+        display: block;
+        font-size: 1rem;
+        font-weight: 800;
+        line-height: 1.1;
+        padding: 0.8rem 1rem;
+        border-radius: 0.25rem;
+        background-color: #444;
+        color: #fff; }
+        .site-header .menu ul li a:hover {
+          background-color: #555; }
+        @media only screen and (min-width: 40em) {
+          .site-header .menu ul li a {
+            font-size: 1.25rem; } }
+        .site-header .menu ul li a .subtext {
+          display: block;
+          font-weight: 300;
+          margin-top: 0.1rem;
+          font-size: 0.7rem; }
+          @media only screen and (min-width: 40em) {
+            .site-header .menu ul li a .subtext {
+              font-size: 0.9rem; } }
+      .site-header .menu ul li.login {
+        display: block;
+        width: calc(100% + -1.5rem); }
+        @media only screen and (min-width: 48em) {
+          .site-header .menu ul li.login {
+            width: auto;
+            display: inline-block; } }
+        .site-header .menu ul li.login a {
+          background-color: #fc0;
+          color: #000;
+          padding-left: 3.5rem;
+          position: relative; }
+          .site-header .menu ul li.login a:before {
+            content: '';
+            top: 0.5rem;
+            left: 0.5rem;
+            position: absolute;
+            width: 2.5rem;
+            height: 2.5rem;
+            background-image: url(../images/log-in.png);
+            background-image: url(../images/log-in.svg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 2.4rem; }
+            @media only screen and (min-width: 40em) {
+              .site-header .menu ul li.login a:before {
+                top: auto; } }
+          .site-header .menu ul li.login a:hover {
+            background-color: #fed635; }
+
+/* fix blackboard theme elements */
+#loginBox {
+  margin: 1.5rem auto 0 auto;
+  max-width: 40rem;
+  background: #e0e5e6;
+  padding: 1rem;
+  border-radius: 0.5rem; }
+  @media only screen and (min-width: 48em) {
+    #loginBox {
+      padding: 2rem; } }
+  #loginBox ul {
+    width: auto;
+    margin: 0 auto; }
+  #loginBox li {
+    padding: 0.25rem 0; }
+    #loginBox li label {
+      font-size: 1rem;
+      margin: 0.8rem 0 0 0; }
+      @media only screen and (min-width: 40em) {
+        #loginBox li label {
+          float: left;
+          width: 8rem; } }
+    #loginBox li input[type=text], #loginBox li input[type=password] {
+      width: 90%;
+      width: calc(100% + -1rem);
+      font-size: 1.2rem; }
+      @media only screen and (min-width: 40em) {
+        #loginBox li input[type=text], #loginBox li input[type=password] {
+          float: left;
+          width: 20rem;
+          width: calc(100% + -9rem); } }
+  #loginBox li + li + li {
+    padding: 0.5rem 1rem 0 0;
+    text-align: right;
+    float: none;
+    display: block; }
+  #loginBox #loginRedirectProviders h3 {
+    display: none; }
+  #loginBox #loginRedirectProvidersList li {
+    margin: 0; }
+
+#loginAnnouncements {
+  border-radius: 0.5rem;
+  margin: 1.5rem auto 0 auto;
+  max-width: 40rem;
+  background: #faf3d7;
+  padding: 1rem;
+  font-size: 1rem !important; }
+  @media only screen and (min-width: 48em) {
+    #loginAnnouncements {
+      padding: 2rem; } }
+  #loginAnnouncements h3 {
+    font-size: 1rem;
+    font-weight: 300;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+    margin: -1rem 0 0.5rem 0;
+    padding: 0 0 0.25rem;
+    border-bottom: 1px solid #eadfb3;
+    color: #4f451d;
+    text-align: center;
+    display: block; }
+  #loginAnnouncements ul {
+    width: auto !important;
+    background: none;
+    padding: 0;
+    list-style: none; }
+    #loginAnnouncements ul li {
+      padding: 0;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      text-align: left;
+      margin: 0;
+      background: none;
+      color: #000;
+      font-size: 1rem; }
+      #loginAnnouncements ul li strong:first-child {
+        font-family: "Open Sans", helvetica neue, helvetica, arial, sans-serif;
+        font-weight: 800;
+        font-size: 1.2rem !important;
+        margin: 0.5rem 0 0 0;
+        line-height: 1.2; }
+      #loginAnnouncements ul li strong + em {
+        display: none; }
+      #loginAnnouncements ul li:before, #loginAnnouncements ul li:after {
+        display: none; }
+      #loginAnnouncements ul li > em {
+        display: none; }
+      #loginAnnouncements ul li .vtbegenerated {
+        font-size: 1rem; }
+        #loginAnnouncements ul li .vtbegenerated p {
+          margin-bottom: 0.5rem; }
+        #loginAnnouncements ul li .vtbegenerated em {
+          display: inline; }
+
+.content .padding {
+  padding-bottom: 3rem; }
+@media only screen and (min-width: 64em) {
+  .content .left, .content .right {
+    width: 46%;
+    clear: both; }
+  .content .left {
+    margin-right: 4%; }
+  .content .right {
+    margin-left: 4%;
+    float: right; } }
+.content article {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #ddd; }
+  .content article:last-child {
+    border-bottom: none; }
+  .content article.announcement {
+    margin: 1.5rem auto 0 auto;
+    max-width: 40rem;
+    background: #faf3d7;
+    padding: 2rem;
+    font-size: 1rem !important; }
+    .content article.announcement h1 {
+      font-weight: 800;
+      font-size: 1.2rem !important;
+      margin: 0; }
+  .content article h1 {
+    font-size: 1.5rem;
+    line-height: 1.1;
+    font-weight: 300;
+    margin: 0.5rem 0; }
+    @media only screen and (min-width: 40em) {
+      .content article h1 {
+        font-size: 2rem; } }
+  .content article h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase; }
+  @media only screen and (min-width: 64em) {
+    .content article {
+      border-bottom: none;
+      margin-top: 0; }
+      .content article.info {
+        margin-bottom: -6rem; }
+        .content article.info:last-child {
+          margin-bottom: -2rem; } }
+.content .help-links {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0; }
+  .content .help-links li {
+    position: relative;
+    display: block;
+    min-height: 4.5rem;
+    padding: 0 0 0 5rem; }
+    @media only screen and (min-width: 64em) {
+      .content .help-links li {
+        padding: 0; } }
+    .content .help-links li.phone:before {
+      background-color: #763183;
+      background-image: url(../images/phone.png);
+      background-size: 3.5rem; }
+    .content .help-links li.phone h2 {
+      color: #763183; }
+    .content .help-links li.email:before {
+      background-color: #c72f80;
+      background-image: url(../images/airplane.png);
+      background-size: 3.25rem; }
+    .content .help-links li.email h2 {
+      color: #c72f80; }
+    .content .help-links li.web:before {
+      background-color: #f57600;
+      background-position: center 0.7rem;
+      background-image: url(../images/computer2.png); }
+    .content .help-links li.web h2 {
+      color: #f57600; }
+    .content .help-links li p {
+      padding: 0;
+      margin: 0 0 1rem 0; }
+    .content .help-links li:before {
+      top: auto;
+      left: 0;
+      width: 4.25rem;
+      height: 4.25rem;
+      border-radius: 4rem;
+      background: #000;
+      background-position: center center;
+      background-size: 3.1rem;
+      background-repeat: no-repeat; }
+      @media only screen and (min-width: 64em) {
+        .content .help-links li:before {
+          left: -5rem; } }
+.content a {
+  font-weight: 800; }
+
+.promo {
+  background: #e0e5e6; }
+  .promo .padding {
+    position: relative;
+    overflow: visible;
+    padding-top: 2rem;
+    padding-bottom: 2rem; }
+    @media only screen and (min-width: 48em) {
+      .promo .padding {
+        background: url(../images/mobile-app.png) no-repeat;
+        background-position: right bottom;
+        background-size: 35%; } }
+  .promo h1 {
+    text-indent: -9999px;
+    position: absolute;
+    top: -3.6rem;
+    left: 50%;
+    margin-left: -6.2rem;
+    width: 12.4rem;
+    height: 5rem;
+    background: url(../images/featured.png) center center no-repeat;
+    background-size: 12.5rem 2.5rem; }
+  .promo h2 {
+    margin: 1rem 0;
+    font-family: "Open Sans", helvetica neue, helvetica, arial, sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    font-weight: 300;
+    color: #40514e; }
+    @media only screen and (min-width: 40em) {
+      .promo h2 {
+        font-size: 3rem; } }
+  @media only screen and (min-width: 48em) {
+    .promo .summary {
+      width: 60%; } }
+  .promo .store-links {
+    text-align: center; }
+  .promo a {
+    font-weight: 800; }
+
+.app-store, .google-play {
+  display: inline-block;
+  text-indent: -9999px;
+  background-color: #000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 9rem;
+  height: 3rem;
+  border-radius: 0.35rem;
+  color: #fff;
+  margin: 0 0.25rem 0.5rem 0.25rem;
+  padding: 0; }
+
+.app-store {
+  background-image: url(../images/appstore.png); }
+
+.google-play {
+  background-image: url(../images/googleplay.png); }
+
+.help-for .padding {
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem; }
+  @media only screen and (min-width: 64em) {
+    .help-for .padding:before {
+      position: absolute;
+      content: '';
+      top: 5.2rem;
+      left: 50%;
+      left: calc(50% + -1rem);
+      width: 0.25rem;
+      height: calc(100% + -9.4rem);
+      background-image: url(../images/dotted.jpg);
+      background-repeat: repeat-y; } }
+  .help-for .padding article {
+    position: relative; }
+    .help-for .padding article h1 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 300;
+      line-height: 1.1; }
+      @media only screen and (min-width: 40em) {
+        .help-for .padding article h1 {
+          font-size: 2rem; } }
+    .help-for .padding article ul {
+      padding: 1rem;
+      list-style: none; }
+      .help-for .padding article ul li {
+        background: url(../images/sketchdot.png) no-repeat;
+        background-position: 0 0.6rem;
+        background-size: 0.5rem 0.5rem;
+        padding: 0 1.25rem 1rem 1.25rem;
+        margin: 0; }
+    @media only screen and (min-width: 40em) {
+      .help-for .padding article:before {
+        position: absolute;
+        content: '';
+        top: 3rem;
+        left: 0;
+        width: 100%;
+        height: 0.25rem;
+        background-image: url(../images/chalkline2.jpg);
+        background-repeat: no-repeat; } }
+    @media only screen and (min-width: 64em) {
+      .help-for .padding article {
+        width: 50%;
+        float: left; } }
+
+footer.site-footer {
+  background-position: center bottom; }
+  footer.site-footer .padding {
+    padding-top: 2rem;
+    padding-bottom: 2rem; }
+  footer.site-footer a {
+    color: #fc0; }
+    footer.site-footer a.its {
+      display: block;
+      text-indent: -9999px;
+      background-image: url(../images/its-logo-one-line.png);
+      background-image: url(../images/its-logo-one-line.svg);
+      background-repeat: no-repeat;
+      background-size: 100%;
+      width: 0;
+      height: 0;
+      padding: 10% 50%; }
+      @media only screen and (min-width: 35em) {
+        footer.site-footer a.its {
+          padding: 0;
+          width: 32.5rem;
+          height: 2.375rem;
+          float: right; } }
+
+@-webkit-keyframes circle {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-moz-keyframes circle {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-ms-keyframes circle {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@-o-keyframes circle {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes circle {
+  from {
+    -webkit-transform: rotate(0);
+    transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@media (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 2dppx) {
+  body {
+    -webkit-font-smoothing: antialiased; } }
+
+/*# sourceMappingURL=blackboard.css.map */
