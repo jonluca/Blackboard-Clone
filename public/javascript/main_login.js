@@ -18,6 +18,8 @@ $(document).ready(function () {
             success: function (data, jqXHR) {
                 console.log('form submitted.');
                 console.log(data);
+                window.location.href = "https://my.usc.edu";
+
             }
         });
     });
