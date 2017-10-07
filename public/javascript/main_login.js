@@ -19,6 +19,9 @@ $(document).ready(function () {
                 console.log('form submitted.');
                 console.log(data);
                 window.location.href = "https://my.usc.edu";
+            },
+            failure: function(data, jqXHR) {
+
             }
         });
     });
