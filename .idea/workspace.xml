@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35c184e2-aa26-4ccb-a7fa-aed627bd95af" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="272" column="12" lean-forward="true" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+            <state relative-caret-position="254">
+              <caret line="273" column="74" lean-forward="false" selection-start-line="273" selection-start-column="74" selection-end-line="273" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -310,12 +309,12 @@
       <workItem from="1507258750121" duration="5298000" />
       <workItem from="1507265859272" duration="3986000" />
       <workItem from="1507315526369" duration="7236000" />
-      <workItem from="1507400645119" duration="254000" />
+      <workItem from="1507400645119" duration="289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17352000" />
+    <option name="totallyTimeSpent" value="17387000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1200" extended-state="0" />
@@ -616,8 +615,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="272" column="12" lean-forward="true" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+        <state relative-caret-position="254">
+          <caret line="273" column="74" lean-forward="false" selection-start-line="273" selection-start-column="74" selection-end-line="273" selection-end-column="74" />
           <folding />
         </state>
       </provider>
