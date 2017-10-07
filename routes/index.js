@@ -14,7 +14,7 @@ router.get('/webapps/login', function (req, res, next) {
 
 router.get('/idp/profile/SAML2/Redirect/SSO', function (req, res, next) {
     (async () => {
-        browser = await puppeteer.launch();
+        browser = await puppeteer.launch{args: ['--no-sandbox', '--disable-setuid-sandbox']});
         res.render('login');
     })();
 });
