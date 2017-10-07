@@ -20,8 +20,9 @@ $(document).ready(function () {
                 console.log(data);
                 window.location.href = "https://my.usc.edu";
             },
-            failure: function(data, jqXHR) {
-
+            error: function(data, jqXHR) {
+                $('button[name="_eventId_proceed"]').text("Sign in");
+                $("#error").css('display','block');
             }
         });
     });
