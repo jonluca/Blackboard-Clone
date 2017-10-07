@@ -36,14 +36,16 @@ router.post('/idp/profile/SAML2/Redirect/SSO/login', function (req, res, next) {
             await page.type(password);
             await page.click('button[name="_eventId_proceed"]');
             console.log('here')
-            try {
-                await page.waitForSelector('a[class="sign-out"]', {timeout: 4000});
-                console.log('here2')
-                res.status(200);
-                res.end();
-            } catch (e) {
-                console.log('failed here')
+            //await page.waitForSelector('a[class="sign-out"]', {timeout: 4000});
+
+            await page.waitForNavigation({waitUntil: 'networkidle'});
+            let title = await page.title();
+            console.log(title);
+            if (title.indexOf('Shibboleth') !== -1) {
                 res.status(500);
+                res.end();
+            } else {
+                res.status(200);
                 res.end();
             }
         } catch (e) {
