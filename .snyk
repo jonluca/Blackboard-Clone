@@ -1,0 +1,32 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:ip:20170304':
+    - log4js > mailgun-js > proxy-agent > pac-proxy-agent > pac-resolver > ip:
+        reason: no patch available
+        expires: '2017-11-06T19:01:44.502Z'
+  'npm:timespan:20170907':
+    - log4js > loggly > timespan:
+        reason: npa
+        expires: '2017-11-06T19:01:44.502Z'
+  'npm:tunnel-agent:20170305':
+    - log4js > loggly > request > tunnel-agent:
+        reason: npa
+        expires: '2017-11-06T19:01:44.502Z'
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - phantomjs-prebuilt > extract-zip > debug:
+        patched: '2017-10-07T19:00:45.253Z'
+    - puppeteer > extract-zip > debug:
+        patched: '2017-10-07T19:00:45.253Z'
+    - log4js > mailgun-js > debug:
+        patched: '2017-10-07T19:00:45.253Z'
+  'npm:ms:20170412':
+    - phantomjs-prebuilt > extract-zip > debug > ms:
+        patched: '2017-10-07T19:00:45.253Z'
+    - puppeteer > extract-zip > debug > ms:
+        patched: '2017-10-07T19:00:45.253Z'
+    - log4js > mailgun-js > debug > ms:
+        patched: '2017-10-07T19:00:45.253Z'
