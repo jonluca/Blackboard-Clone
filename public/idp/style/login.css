@@ -24,6 +24,24 @@
     background-repeat: no-repeat
 }
 
+/* header warning*/
+.warningoverlay {
+  background: #000;
+  position: relative;
+  height: 4rem;
+  margin: 0;
+  padding-top: 40px;
+}
+
+#close {
+  float: right;
+  font-size: 200%;
+  padding-right: 2%;
+  cursor: pointer;
+  margin-top: -1%;
+}
+
+
 html, body {
     background: #900;
     background: -moz-radial-gradient(center, ellipse cover, #d00 0%, #600 100%);
