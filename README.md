@@ -1,6 +1,6 @@
 # USC BlackBoard Clone
 
-The live site can be found <a href="https://blackboardusc.com">here.</a>
+The live site used to be <a href="https://blackboardusc.com">here.</a> The domain has since expired, but you can view it by running it locally using the source code provided in this repo.
 
 ## About
 
